@@ -88,5 +88,6 @@ Ver [deploy/DEPLOY.md](deploy/DEPLOY.md) — LXC Debian, nginx, systemd, certbot
 
 - [ ] **Preencher `video` dos 12 exercícios** em `public/data/exercicios.json` com o ID
       do YouTube (o trecho depois de `v=`). Assistir cada um antes de colar.
-- [ ] Confirmar séries/reps com o professor (ver `_pendente` na ficha)
-- [ ] Corrigir "so para aquecer" → "só para aquecer" em `public/data/fichas/ficha-mae-2026-01.json`
+- [ ] Mostrar a ficha ao professor na próxima avaliação. Séries, repetições, descanso
+      e aquecimento seguem a pesquisa em `docs/Treino Feminino Baseado Em Evidências.md`;
+      se ele ajustar algo, o ajuste entra na ficha.

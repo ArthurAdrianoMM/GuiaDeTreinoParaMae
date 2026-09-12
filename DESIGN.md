@@ -490,15 +490,22 @@ left origin and a 0.45s transition. At completion the bar gains `.sessao--comple
 count turns pine and bold, and the copy switches to "Treino completo · N séries".
 
 ### Warm-up Note (`.aquecimento`)
-A white bordered block at `--r-sm` with a pine-tinted icon and one line of prose, opening
-"Antes de começar:". Never a card, never shadowed — it is an instruction, not a record.
+A white bordered block at `--r-sm` with a pine-tinted icon and up to two paragraphs of
+prose, opening "Antes de começar:". The second paragraph, when present, covers the
+approach sets for the first compound movements. Never a card, never shadowed — it is an
+instruction, not a record.
+
+### Training Rules (`.regras`)
+A closed `<details>` in the same white block as the warm-up note, one notch quieter: the
+`passos` icon, "Como treinar", a rotating chevron. Inside, uppercase 0.8125rem headings
+over body prose — how heavy, what tempo, when to add weight, why the rest is long. Closed
+by default on purpose: it is first-weeks reading, not something she crosses mid-set.
 
 ### Provisional Note (`.nota`)
 Character: quiet, but present. Dashed `--linha-forte` border on the page ground, tertiary
-ink at 0.8125rem, with the `nota` icon. Carries the ficha's observation and, while the
-ficha is `_pendente`, the sentence that sets/reps/rest are an initial suggestion. It uses
-dashes rather than amber on purpose (see The Not-Amber Rule): a prescribed number with no
-caveat reads as an order.
+ink at 0.8125rem, with the `nota` icon. Carries the ficha's observation — when to train
+and how it meets the rest of her week. It uses dashes rather than amber on purpose (see
+The Not-Amber Rule).
 
 ### Exercise Card (`.ex`)
 Character: a sheet from the paper ficha. White, `--r` (14px), 1px `--linha` border, the

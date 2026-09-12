@@ -42,8 +42,9 @@ by hand; there is no admin UI and there will not be one.
   The app must never block on the network.
 - **Hands:** possibly sweaty, possibly mid-set. Touch targets and recording actions must
   tolerate imprecision.
-- **Rhythm:** 6 exercises per treino, 2-3 sets each, ~45-60s rest between sets. She
-  interacts in short bursts and locks the screen between them.
+- **Rhythm:** 6 exercises per treino, 2-3 sets each, 1 to 2.5 minutes of rest between
+  sets (long on the compound lifts, by prescription). She interacts in short bursts and
+  locks the screen between them.
 
 ## Capabilities and Constraints
 
@@ -70,8 +71,9 @@ simply "Treino".
 
 - 12 real exercises with real instructions, safety notes and purpose text, written for
   this user (`public/data/exercicios.json`).
-- One real ficha, A/B full body, marked `_pendente` because sets/reps are a conservative
-  beginner guess awaiting confirmation from the professor.
+- One real ficha, A/B full body. Sets, reps, rest, warm-up and the training rules
+  (`comoTreinar`) are derived from `docs/Treino Feminino Baseado Em Evidências.md`,
+  a research report on resistance training for post-menopausal women — not guesses.
 - **Absent and not to be invented:** the YouTube video ids are all `null`. Nothing may
   claim a video exists. No history data, no photos of the user, no testimonials.
 
