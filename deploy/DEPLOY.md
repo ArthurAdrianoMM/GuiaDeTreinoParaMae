@@ -113,6 +113,19 @@ pct exec 101 -- bash -c '
 '
 ```
 
+## 5b. Fechar o SSH do container
+
+O template do Debian sobe o sshd escutando em todas as interfaces. A administração
+é toda por `pct exec` a partir do host, então essa porta não serve a nada — e é a
+única coisa que ficaria escutando num endereço roteável.
+
+```sh
+pct exec 101 -- systemctl disable --now ssh
+```
+
+Depois disso, `ss -tlnp` dentro do container só mostra loopback. Para entrar, use
+`pct enter 101` no host — que continua funcionando, pois não passa por rede.
+
 ## 6. O túnel
 
 Instalar o cloudflared:
