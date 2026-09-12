@@ -2,22 +2,45 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fbf9f6">
+  <meta name="description" content="Ficha de treino, execução de cada exercício e registro do que foi feito.">
   <title>Treino</title>
+  <!-- Marca autoral: papel morno e quatro barras em pinho, a mesma ideia de progresso da barra da sessão. -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23fbf9f6'/><g stroke='%232f6b4f' stroke-width='3.2' stroke-linecap='round'><path d='M8 23v-4'/><path d='M14.7 23v-8'/><path d='M21.3 23v-12'/><path d='M28 23v-4' stroke='%23d7cec3'/></g></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23fbf9f6'/><g stroke='%232f6b4f' stroke-width='3.2' stroke-linecap='round'><path d='M8 23v-4'/><path d='M14.7 23v-8'/><path d='M21.3 23v-12'/><path d='M28 23v-4' stroke='%23d7cec3'/></g></svg>">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header class="topo">
-    <h1>Meu treino</h1>
-    <nav id="abas" class="abas" aria-label="Escolher treino"></nav>
-  </header>
+  <div class="envelope">
+    <header class="topo">
+      <div class="topo__linha">
+        <h1>Treino de <span id="nome-usuario">…</span></h1>
+        <p id="sync" class="sync" role="status" data-status="enviando">Carregando…</p>
+      </div>
+      <div id="aviso-acesso" class="aviso" hidden></div>
+      <nav id="abas" class="abas" aria-label="Escolher treino"></nav>
+    </header>
 
-  <main>
-    <h2 id="titulo-treino"></h2>
-    <p id="aquecimento" class="aquecimento"></p>
-    <p id="resumo" class="resumo" role="status"></p>
-    <div id="lista-exercicios">Carregando…</div>
-  </main>
+    <div id="sessao" class="sessao" hidden>
+      <p class="sessao__topo">
+        <span class="sessao__titulo" id="sessao-titulo"></span>
+        <span class="sessao__conta num" id="sessao-conta" role="status"></span>
+      </p>
+      <div class="trilho"><div class="trilho__cheio" id="trilho"></div></div>
+    </div>
+
+    <main>
+      <h2 class="so-leitor">Exercícios de hoje</h2>
+      <div id="aquecimento" class="aquecimento" hidden></div>
+      <div id="nota-ficha" class="nota" hidden></div>
+      <div id="lista-exercicios" class="lista">
+        <div class="carregando" aria-label="Carregando o treino" role="status">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </main>
+  </div>
 
   <script type="module" src="js/app.js"></script>
 </body>

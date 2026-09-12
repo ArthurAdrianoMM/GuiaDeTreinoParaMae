@@ -1,59 +1,673 @@
-/* Estilo minimo e funcional. A identidade visual vem depois. */
-* { box-sizing: border-box; }
+/* ==========================================================================
+   Guia de Treino — sistema visual "papel morno"
+   Fundo de papel quente, cartoes brancos, tinta preta-quente e um unico verde
+   pinho que quer dizer uma coisa so': feito. Ambar e' reservado para "ainda nao
+   subiu para o servidor". Nada mais tem cor.
+   Superficie de uso: celular na mao, academia iluminada. Por isso claro.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* Papel e tinta */
+  --papel: #fbf9f6;
+  --carta: #ffffff;
+  --tinta: #1a1714;
+  --tinta-2: #4a423b;
+  --tinta-3: #6f665e;
+
+  /* Pinho: progresso e conclusao */
+  --pinho: #2f6b4f;
+  --pinho-fundo: #245740;
+  --pinho-claro: #e9f1ec;
+  --pinho-nevoa: #f4f8f5;
+
+  /* Ambar: pendente de envio */
+  --ambar: #8a5a00;
+  --ambar-claro: #fdf4e6;
+
+  /* Rubro: sem acesso */
+  --rubro: #a32e22;
+  --rubro-claro: #fbeeec;
+
+  /* Tracos */
+  --linha: #ebe5dc;
+  --linha-forte: #d7cec3;
+
+  /* Forma */
+  --r: 14px;
+  --r-sm: 10px;
+  --r-pilula: 999px;
+
+  /* Profundidade: deslocamento real + desfoque macio, nunca um halo colorido */
+  --sombra: 0 1px 2px rgba(26, 23, 20, .05), 0 6px 16px -8px rgba(26, 23, 20, .12);
+
+  /* Movimento: uma so' curva, saida exponencial */
+  --saida: cubic-bezier(.16, 1, .3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Varias classes daqui usam display: flex; sem isto o atributo hidden nao segura. */
+[hidden] { display: none !important; }
+
+html { -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
-  padding: 1rem;
-  font-family: system-ui, sans-serif;
+  padding: 0 0 4rem;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   font-size: 17px;
   line-height: 1.5;
-  max-width: 720px;
-  margin-inline: auto;
+  -webkit-font-smoothing: antialiased;
 }
 
-h1 { font-size: 1.4rem; margin: 0 0 .75rem; }
-h2 { font-size: 1.15rem; margin: 1.25rem 0 .25rem; }
-h3 { font-size: 1.05rem; margin: 0; }
-h4 { font-size: .95rem; margin: .75rem 0 .25rem; }
+/* As superficies que o navegador desenha tambem sao nossas. */
+::selection { background: var(--pinho-claro); color: var(--pinho-fundo); }
+:focus-visible {
+  outline: 2px solid var(--pinho);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+* { scrollbar-width: thin; scrollbar-color: var(--linha-forte) transparent; }
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-thumb { background: var(--linha-forte); border-radius: var(--r-pilula); border: 3px solid var(--papel); }
+*::-webkit-scrollbar-track { background: transparent; }
 
-.abas { display: flex; gap: .5rem; flex-wrap: wrap; }
+.envelope {
+  max-width: 34rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+h1, h2, h3, h4 { margin: 0; font-weight: 600; letter-spacing: -.012em; text-wrap: balance; }
+
+.ic {
+  width: 1.25em;
+  height: 1.25em;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.num { font-variant-numeric: tabular-nums; }
+
+code {
+  padding: .1em .35em;
+  border: 1px solid var(--linha-forte);
+  border-radius: 5px;
+  background: var(--carta);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .9em;
+}
+
+/* Escondido dos olhos, presente para o leitor de tela. */
+.so-leitor {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+
+/* --------------------------------------------------------------- cabecalho */
+
+.topo {
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+.topo__linha {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.topo h1 {
+  font-size: 1.3125rem;
+  line-height: 1.25;
+}
+
+.topo h1 span { color: var(--tinta); }
+
+/* Estado de sincronia: pilula discreta, cor so' quando ha' algo a dizer. */
+.sync {
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  margin: .125rem 0 0;
+  padding: .3125rem .5625rem;
+  border-radius: var(--r-pilula);
+  background: var(--pinho-nevoa);
+  color: var(--tinta-3);
+  font-size: .75rem;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.sync .ic { width: 15px; height: 15px; }
+.sync[data-status="sincronizado"] { color: var(--pinho); }
+.sync[data-status="enviando"],
+.sync[data-status="pendente"],
+.sync[data-status="offline"] { background: var(--ambar-claro); color: var(--ambar); }
+.sync[data-status="sem-token"] { background: var(--rubro-claro); color: var(--rubro); }
+
+/* Aviso de acesso: ocupa a largura toda porque nada vai sincronizar sem isso. */
+.aviso {
+  display: flex;
+  gap: .625rem;
+  margin-top: 1rem;
+  padding: .8125rem .875rem;
+  border: 1px solid rgba(163, 46, 34, .22);
+  border-radius: var(--r-sm);
+  background: var(--rubro-claro);
+  color: var(--rubro);
+  font-size: .875rem;
+}
+.aviso .ic { margin-top: .125rem; }
+.aviso p { margin: 0; }
+.aviso strong { display: block; }
+
+/* -------------------------------------------------------------------- abas */
+
+.abas {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: .25rem;
+  margin-top: 1.125rem;
+  padding: .25rem;
+  border: 1px solid var(--linha);
+  border-radius: var(--r);
+  background: var(--carta);
+}
+
 .abas button {
-  flex: 1 1 auto;
-  padding: .6rem .8rem;
+  min-height: 46px;
+  padding: .4rem .5rem;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--tinta-2);
+  font: inherit;
+  font-size: .9375rem;
+  font-weight: 600;
+  line-height: 1.15;
+  cursor: pointer;
+  transition: background-color .2s var(--saida), color .2s var(--saida);
+}
+.abas button small {
+  display: block;
+  font-size: .6875rem;
+  font-weight: 500;
+  color: var(--tinta-3);
+  letter-spacing: .01em;
+}
+.abas button:hover { background: var(--pinho-nevoa); color: var(--tinta); }
+.abas button:active { background: var(--pinho-claro); }
+.abas button[aria-pressed="true"]:hover { background: var(--tinta); color: var(--carta); }
+.abas button[aria-pressed="true"]:active { background: var(--tinta-2); }
+.abas button[aria-pressed="true"] {
+  background: var(--tinta);
+  color: var(--carta);
+}
+.abas button[aria-pressed="true"] small { color: rgba(255, 255, 255, .68); }
+
+/* ------------------------------------------------------- barra da sessao */
+
+.sessao {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin-top: 1.125rem;
+  padding: .75rem 0 .6875rem;
+  background: var(--papel);
+}
+.sessao::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 1px;
+  background: var(--linha);
+}
+
+.sessao__topo {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .75rem;
+  font-size: .8125rem;
+  color: var(--tinta-3);
+}
+.sessao__titulo { color: var(--tinta-2); font-weight: 600; }
+.sessao__conta { color: var(--tinta-2); }
+.sessao--completa .sessao__conta { color: var(--pinho); font-weight: 600; }
+
+.trilho {
+  height: 6px;
+  margin-top: .5rem;
+  border-radius: var(--r-pilula);
+  background: var(--linha);
+  overflow: hidden;
+}
+/* Cresce por transform, nao por width: width remede o layout a cada quadro. */
+.trilho__cheio {
+  height: 100%;
+  width: 100%;
+  border-radius: inherit;
+  background: var(--pinho);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .45s var(--saida);
+}
+
+/* --------------------------------------------------------------- aquecimento */
+
+.aquecimento {
+  display: flex;
+  gap: .625rem;
+  margin: 1.25rem 0 0;
+  padding: .8125rem .875rem;
+  border: 1px solid var(--linha);
+  border-radius: var(--r-sm);
+  background: var(--carta);
+  color: var(--tinta-2);
+  font-size: .875rem;
+}
+.aquecimento .ic { margin-top: .1875rem; color: var(--pinho); }
+.aquecimento p { margin: 0; }
+.aquecimento strong { color: var(--tinta); }
+
+/* Ficha provisoria e observacao: quieto, mas presente. Nao usa ambar — ambar
+   aqui quer dizer "nao subiu para o servidor" e nada mais. */
+.nota {
+  display: flex;
+  gap: .625rem;
+  margin-top: .5rem;
+  padding: .75rem .875rem;
+  border: 1px dashed var(--linha-forte);
+  border-radius: var(--r-sm);
+  color: var(--tinta-3);
+  font-size: .8125rem;
+}
+.nota .ic { margin-top: .125rem; }
+.nota p { margin: 0 0 .3125rem; }
+.nota p:last-child { margin-bottom: 0; }
+.nota b { color: var(--tinta-2); font-weight: 600; }
+
+/* ----------------------------------------------------------------- exercicio */
+
+.lista { margin-top: 1.25rem; }
+
+.ex {
+  margin-bottom: .875rem;
+  border: 1px solid var(--linha);
+  border-radius: var(--r);
+  background: var(--carta);
+  box-shadow: var(--sombra);
+}
+
+.ex__cabeca { padding: 1rem 1rem .875rem; }
+
+.ex__nome { font-size: 1.0625rem; line-height: 1.3; }
+
+.ex__meta {
+  margin: .25rem 0 0;
+  color: var(--tinta-3);
+  font-size: .8125rem;
+}
+
+.ex__prescricao {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem;
+  margin: .625rem 0 0;
+}
+
+.ex__descanso {
+  color: var(--tinta-3);
+  font-size: .8125rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.ex__alvo {
+  display: inline-flex;
+  align-items: center;
+  padding: .25rem .5rem;
+  border-radius: var(--r-pilula);
+  background: var(--pinho-nevoa);
+  color: var(--pinho-fundo);
+  font-size: .8125rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.ex__anterior {
+  margin: .5rem 0 0;
+  color: var(--tinta-3);
+  font-size: .8125rem;
+  font-variant-numeric: tabular-nums;
+}
+.ex__anterior b { color: var(--tinta-2); font-weight: 600; }
+
+/* ---------------------------------------------------------------- series */
+
+.series { margin: 0; padding: 0; list-style: none; }
+
+.serie { border-top: 1px solid var(--linha); }
+
+.serie__linha {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+  padding: .5rem .75rem .5rem 1rem;
+  /* o check agora fecha a linha pela direita */
+}
+
+.serie__n {
+  width: 1.5rem;
+  color: var(--tinta-3);
+  font-size: .8125rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.serie[data-feita="sim"] { background: var(--pinho-nevoa); }
+.serie[data-feita="sim"] .serie__n { color: var(--pinho); font-weight: 600; }
+
+.check {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1.5px solid var(--linha-forte);
+  border-radius: 50%;
+  background: var(--carta);
+  color: transparent;
+  cursor: pointer;
+  transition: background-color .24s var(--saida), border-color .24s var(--saida), color .24s var(--saida);
+}
+.check .ic {
+  width: 21px;
+  height: 21px;
+  stroke-width: 2.25;
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  transition: stroke-dashoffset .32s var(--saida) .04s;
+}
+.check:hover { border-color: var(--pinho); }
+.check:active { background-color: var(--pinho-claro); border-color: var(--pinho); }
+.check[aria-pressed="true"]:active { background-color: var(--pinho-fundo); }
+.check[aria-pressed="true"] {
+  background: var(--pinho);
+  border-color: var(--pinho);
+  color: #fff;
+}
+.check[aria-pressed="true"] .ic { stroke-dashoffset: 0; }
+
+.serie__valores {
+  display: flex;
+  gap: .375rem;
+  margin-left: auto;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .25rem;
+  min-width: 4.75rem;
+  min-height: 44px;
+  padding: .4375rem .625rem;
+  border: 1px solid var(--linha-forte);
+  border-radius: var(--r-sm);
+  background: var(--carta);
+  color: var(--tinta);
   font: inherit;
   cursor: pointer;
-  border: 1px solid #999;
-  border-radius: 6px;
-  background: #fff;
+  transition: border-color .2s var(--saida), background-color .2s var(--saida);
 }
-.abas button[aria-pressed="true"] { background: #222; color: #fff; border-color: #222; }
-
-.aquecimento, .resumo { margin: .25rem 0; font-size: .9rem; }
-.resumo { padding: .5rem; background: #f2f2f2; border-radius: 6px; }
-.presenca { display: inline-block; margin-left: .5rem; font-weight: 600; }
-
-.card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: .75rem;
-  margin: .75rem 0;
+.chip__valor {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
 }
-.card .meta, .card .alvo, .card .anterior { margin: .15rem 0; font-size: .85rem; }
-.card .alvo { font-weight: 600; }
-.card .anterior { font-style: italic; }
+.chip__un { font-size: .6875rem; color: var(--tinta-3); }
+.chip--vazio { border-color: var(--linha); }
+.chip--vazio .chip__valor { color: var(--tinta-3); }
+.chip:hover { border-color: var(--linha-forte); background: var(--pinho-nevoa); }
+.chip:active { background: var(--pinho-claro); border-color: var(--pinho); }
+.chip[aria-expanded="true"] {
+  border-color: var(--pinho);
+  box-shadow: inset 0 0 0 1px var(--pinho);
+  background: var(--pinho-nevoa);
+}
 
-table.series { width: 100%; border-collapse: collapse; margin-top: .6rem; }
-table.series th { font-size: .75rem; text-align: left; font-weight: 600; padding: .2rem; }
-table.series td { padding: .25rem .2rem; }
-table.series input[type="number"] { width: 100%; padding: .45rem; font: inherit; }
-/* Alvo de toque grande: ela vai marcar isso com a mao suada na academia. */
-table.series input[type="checkbox"] { width: 26px; height: 26px; }
-table.series tr.feita { opacity: .55; }
+/* ----------------------------------------------------------------- regua */
 
-.detalhes { margin-top: .6rem; border-top: 1px solid #eee; padding-top: .4rem; }
-.detalhes summary { cursor: pointer; font-size: .9rem; padding: .3rem 0; }
-.detalhes ol, .detalhes ul { padding-left: 1.25rem; margin: .25rem 0; }
-.detalhes .pendente { font-style: italic; color: #666; }
+.gaveta {
+  overflow: hidden;
+  padding: 0 .75rem .75rem;
+  animation: abrir .3s var(--saida);
+}
+@keyframes abrir {
+  from { opacity: 0; clip-path: inset(0 0 100% 0); }
+  to   { opacity: 1; clip-path: inset(0 0 0 0); }
+}
 
-.video { margin-top: .75rem; }
-.video iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; }
+.gaveta__rotulo {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 0 0 .375rem;
+  color: var(--tinta-3);
+  font-size: .75rem;
+}
+.gaveta__leitura {
+  color: var(--pinho-fundo);
+  font-size: .9375rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.regua {
+  --tique: 30px;
+  position: relative;
+  border: 1px solid var(--linha);
+  border-radius: var(--r-sm);
+  background: var(--papel);
+  touch-action: pan-x;
+}
+
+/* A lente: a faixa que marca qual tique esta' escolhido. */
+.regua::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  left: 50%;
+  width: var(--tique);
+  transform: translateX(-50%);
+  border-radius: 7px;
+  background: var(--pinho-claro);
+  pointer-events: none;
+}
+
+.regua__agulha {
+  position: absolute;
+  top: 9px;
+  bottom: 24px;
+  left: 50%;
+  width: 2px;
+  margin-left: -1px;
+  border-radius: 2px;
+  background: var(--pinho);
+  pointer-events: none;
+}
+
+.regua__pista {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  padding-inline: calc(50% - var(--tique) / 2);
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+}
+.regua__pista::-webkit-scrollbar { display: none; }
+
+.regua__tique {
+  flex: 0 0 var(--tique);
+  scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .375rem;
+  height: 58px;
+  padding-top: 14px;
+  cursor: pointer;
+}
+.regua__tique::before {
+  content: "";
+  width: 1.5px;
+  height: 11px;
+  border-radius: 1px;
+  background: var(--linha-forte);
+}
+.regua__tique--maior::before { height: 17px; background: var(--tinta-3); }
+
+.regua__numero {
+  color: var(--tinta-3);
+  font-size: .6875rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+.regua__tique.esta-no-centro .regua__numero { color: var(--pinho-fundo); font-weight: 700; }
+
+/* ------------------------------------------------------------------- guia */
+
+.guia { border-top: 1px solid var(--linha); }
+
+.guia summary {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  min-height: 48px;
+  padding: 0 1rem;
+  color: var(--tinta-2);
+  font-size: .875rem;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+.guia summary::-webkit-details-marker { display: none; }
+/* A guia e' sempre o ultimo filho do cartao: o fundo do :hover precisa respeitar
+   o raio de baixo, senao a cor quadra os cantos. Arredondar aqui, e nao por
+   overflow:hidden no cartao, para nao cortar o anel de foco do proprio summary. */
+.guia summary { border-radius: 0 0 13px 13px; }
+.guia[open] summary { border-radius: 0; }
+.guia summary:hover { color: var(--tinta); background: var(--pinho-nevoa); }
+.guia summary:active { background: var(--pinho-claro); }
+.guia summary .ic:first-child { color: var(--pinho); }
+.guia__seta { margin-left: auto; color: var(--tinta-3); transition: transform .26s var(--saida); }
+.guia[open] .guia__seta { transform: rotate(180deg); }
+
+.guia__corpo {
+  padding: .25rem 1rem 1rem;
+  color: var(--tinta-2);
+  font-size: .9375rem;
+}
+.guia__corpo p { margin: 0 0 .75rem; }
+.guia__corpo h4 {
+  display: flex;
+  align-items: center;
+  gap: .4375rem;
+  margin: 1.125rem 0 .4375rem;
+  color: var(--tinta);
+  font-size: .8125rem;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+.guia__corpo h4 .ic { width: 15px; height: 15px; color: var(--tinta-3); }
+.guia__corpo ol, .guia__corpo ul { margin: 0; padding-left: 1.25rem; }
+.guia__corpo li { margin-bottom: .3125rem; }
+.guia__corpo li::marker { color: var(--tinta-3); }
+
+.guia__atencao {
+  padding: .75rem .875rem;
+  border: 1px solid rgba(138, 90, 0, .2);
+  border-radius: var(--r-sm);
+  background: var(--ambar-claro);
+}
+.guia__atencao h4 { margin-top: 0; color: var(--ambar); }
+.guia__atencao h4 .ic { color: var(--ambar); }
+.guia__atencao li::marker { color: var(--ambar); }
+
+.musculos { margin-top: 1rem; color: var(--tinta-3); font-size: .8125rem; }
+
+.video { margin-top: 1rem; }
+.video iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: var(--tinta);
+}
+.video__ausente {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin: 0;
+  padding: .8125rem .875rem;
+  border: 1px dashed var(--linha-forte);
+  border-radius: var(--r-sm);
+  color: var(--tinta-3);
+  font-size: .8125rem;
+}
+
+/* ----------------------------------------------------------------- estados */
+
+.estado {
+  margin-top: 1.25rem;
+  padding: 2.5rem 1.25rem;
+  border: 1px dashed var(--linha-forte);
+  border-radius: var(--r);
+  color: var(--tinta-3);
+  font-size: .9375rem;
+  text-align: center;
+}
+.estado strong { display: block; margin-bottom: .25rem; color: var(--tinta); }
+
+.carregando { display: grid; gap: .875rem; margin-top: 1.25rem; }
+.carregando span {
+  height: 148px;
+  border-radius: var(--r);
+  background: linear-gradient(105deg, var(--carta) 32%, #f4f0ea 50%, var(--carta) 68%) 0 0 / 320% 100%;
+  border: 1px solid var(--linha);
+  animation: cintilar 1.4s linear infinite;
+}
+@keyframes cintilar { to { background-position: -320% 0; } }
+
+/* ---------------------------------------------------------- telas maiores */
+
+@media (min-width: 40rem) {
+  .envelope { padding-inline: 1.5rem; }
+  .topo { padding-top: 2.5rem; }
+  .topo h1 { font-size: 1.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
