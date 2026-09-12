@@ -1,0 +1,59 @@
+/* Estilo minimo e funcional. A identidade visual vem depois. */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 1rem;
+  font-family: system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.5;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+h1 { font-size: 1.4rem; margin: 0 0 .75rem; }
+h2 { font-size: 1.15rem; margin: 1.25rem 0 .25rem; }
+h3 { font-size: 1.05rem; margin: 0; }
+h4 { font-size: .95rem; margin: .75rem 0 .25rem; }
+
+.abas { display: flex; gap: .5rem; flex-wrap: wrap; }
+.abas button {
+  flex: 1 1 auto;
+  padding: .6rem .8rem;
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid #999;
+  border-radius: 6px;
+  background: #fff;
+}
+.abas button[aria-pressed="true"] { background: #222; color: #fff; border-color: #222; }
+
+.aquecimento, .resumo { margin: .25rem 0; font-size: .9rem; }
+.resumo { padding: .5rem; background: #f2f2f2; border-radius: 6px; }
+.presenca { display: inline-block; margin-left: .5rem; font-weight: 600; }
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: .75rem;
+  margin: .75rem 0;
+}
+.card .meta, .card .alvo, .card .anterior { margin: .15rem 0; font-size: .85rem; }
+.card .alvo { font-weight: 600; }
+.card .anterior { font-style: italic; }
+
+table.series { width: 100%; border-collapse: collapse; margin-top: .6rem; }
+table.series th { font-size: .75rem; text-align: left; font-weight: 600; padding: .2rem; }
+table.series td { padding: .25rem .2rem; }
+table.series input[type="number"] { width: 100%; padding: .45rem; font: inherit; }
+/* Alvo de toque grande: ela vai marcar isso com a mao suada na academia. */
+table.series input[type="checkbox"] { width: 26px; height: 26px; }
+table.series tr.feita { opacity: .55; }
+
+.detalhes { margin-top: .6rem; border-top: 1px solid #eee; padding-top: .4rem; }
+.detalhes summary { cursor: pointer; font-size: .9rem; padding: .3rem 0; }
+.detalhes ol, .detalhes ul { padding-left: 1.25rem; margin: .25rem 0; }
+.detalhes .pendente { font-style: italic; color: #666; }
+
+.video { margin-top: .75rem; }
+.video iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; }

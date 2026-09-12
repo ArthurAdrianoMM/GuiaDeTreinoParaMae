@@ -1,0 +1,318 @@
+{
+  "_comentario": "Catalogo de exercicios. Reutilizavel entre fichas e entre pessoas. A ficha referencia por id e define series/reps. video = ID do YouTube (o que vem depois de v=), ainda a preencher.",
+  "exercicios": [
+    {
+      "id": "goblet-squat",
+      "nome": "Agachamento Cálice",
+      "nomeAlt": "Goblet Squat",
+      "grupoPrincipal": "Pernas",
+      "grupos": [
+        "Quadríceps",
+        "Glúteos"
+      ],
+      "equipamento": "Halter",
+      "medida": "reps",
+      "unilateral": false,
+      "porque": "É o movimento de sentar e levantar da cadeira. Fortalecer isso mantém a independência para levantar do sofá, do vaso e do carro sem apoio.",
+      "comoFazer": [
+        "Segure um halter na vertical, junto ao peito, com as duas mãos",
+        "Pés na largura dos ombros, pontas levemente para fora",
+        "Desça empurrando o quadril para trás, como se fosse sentar numa cadeira",
+        "Desça até onde for confortável e suba empurrando o chão com os pés"
+      ],
+      "atencao": [
+        "Joelho não vai para dentro — aponte na direção do pé",
+        "Peito aberto, olhar para frente",
+        "Se sentir dor no joelho, diminua a profundidade"
+      ],
+      "video": null
+    },
+    {
+      "id": "rdl-halteres",
+      "nome": "Peso Morto Romeno",
+      "nomeAlt": "RDL com halteres",
+      "grupoPrincipal": "Pernas",
+      "grupos": [
+        "Posterior de coxa",
+        "Glúteos",
+        "Lombar"
+      ],
+      "equipamento": "Halteres",
+      "medida": "reps",
+      "unilateral": false,
+      "porque": "Ensina a pegar peso do chão dobrando o quadril em vez de curvar a coluna. É o que protege a lombar no dia a dia.",
+      "comoFazer": [
+        "Em pé, um halter em cada mão à frente das coxas",
+        "Joelhos levemente dobrados e fixos assim",
+        "Empurre o quadril para trás, descendo os halteres rentes às pernas",
+        "Desça até sentir o alongamento atrás da coxa e volte apertando o glúteo"
+      ],
+      "atencao": [
+        "A coluna fica reta o tempo todo — quem desce é o quadril, não as costas",
+        "Não é agachamento: o joelho quase não dobra",
+        "Halteres sempre encostados na perna"
+      ],
+      "video": null
+    },
+    {
+      "id": "puxada-frontal",
+      "nome": "Puxada Frontal",
+      "nomeAlt": "Lat Pulldown",
+      "grupoPrincipal": "Costas",
+      "grupos": [
+        "Dorsal",
+        "Bíceps"
+      ],
+      "equipamento": "Máquina",
+      "medida": "reps",
+      "unilateral": false,
+      "porque": "Fortalece as costas, que é o que segura a postura. Combate o ombro caído para frente de quem passa o dia sentada.",
+      "comoFazer": [
+        "Sentada, joelhos presos sob o apoio",
+        "Pegada mais aberta que os ombros",
+        "Puxe a barra em direção ao peito, descendo os cotovelos",
+        "Suba controlando, sem deixar o peso cair"
+      ],
+      "atencao": [
+        "Puxe com as costas, não com a força do braço",
+        "Não puxe atrás da nuca — sempre na frente",
+        "Tronco quase reto, sem jogar o corpo para trás"
+      ],
+      "video": null
+    },
+    {
+      "id": "supino-halteres",
+      "nome": "Press de Peito",
+      "nomeAlt": "Supino com halteres",
+      "grupoPrincipal": "Peitoral",
+      "grupos": [
+        "Peitoral",
+        "Tríceps",
+        "Ombros"
+      ],
+      "equipamento": "Halteres + banco",
+      "medida": "reps",
+      "unilateral": false,
+      "porque": "É o movimento de empurrar. Ajuda a empurrar portas pesadas, carrinho de mercado e a levantar do chão se precisar.",
+      "comoFazer": [
+        "Deitada no banco plano, pés apoiados no chão",
+        "Halteres na altura do peito, cotovelos abertos em ângulo confortável",
+        "Empurre para cima até quase esticar o braço",
+        "Desça devagar até sentir o peito alongar"
+      ],
+      "atencao": [
+        "Não trave o cotovelo com força lá em cima",
+        "Desça controlado — a descida é onde está o ganho",
+        "Cotovelo não precisa abrir 90 graus, um pouco fechado protege o ombro"
+      ],
+      "video": null
+    },
+    {
+      "id": "elevacao-lateral",
+      "nome": "Elevação Lateral",
+      "nomeAlt": "Lateral Raise",
+      "grupoPrincipal": "Ombros",
+      "grupos": [
+        "Deltoide lateral"
+      ],
+      "equipamento": "Halteres",
+      "medida": "reps",
+      "unilateral": false,
+      "porque": "Deixa o ombro mais arredondado e forte, o que ajuda a alcançar coisas em prateleiras altas e a carregar sacola.",
+      "comoFazer": [
+        "Em pé, halteres leves ao lado do corpo",
+        "Cotovelos levemente dobrados",
+        "Levante os braços para os lados até a altura dos ombros",
+        "Desça devagar, sem deixar cair"
+      ],
+      "atencao": [
+        "Peso leve — esse exercício não é de força, é de controle",
+        "Não passe da altura do ombro",
+        "Não balance o corpo para ajudar"
+      ],
+      "video": null
+    },
+    {
+      "id": "triceps-polia",
+      "nome": "Extensão de Tríceps",
+      "nomeAlt": "Tríceps na polia",
+      "grupoPrincipal": "Braços",
+      "grupos": [
+        "Tríceps"
+      ],
+      "equipamento": "Polia alta",
+      "medida": "reps",
+      "unilateral": false,
+      "porque": "Trabalha a parte de trás do braço, a região do 'tchauzinho'. Também é o que dá força para se apoiar e levantar.",
+      "comoFazer": [
+        "Em pé de frente para a polia alta, pegada na barra",
+        "Cotovelos colados no tronco",
+        "Empurre a barra para baixo até esticar o braço",
+        "Volte devagar até o cotovelo dobrar 90 graus"
+      ],
+      "atencao": [
+        "Só o antebraço se move — o cotovelo fica parado no lugar",
+        "Não curve o corpo por cima da barra para fazer força"
+      ],
+      "video": null
+    },
+    {
+      "id": "leg-press-45",
+      "nome": "Leg Press 45°",
+      "nomeAlt": "Prensa de pernas",
+      "grupoPrincipal": "Pernas",
+      "grupos": [
+        "Quadríceps",
+        "Glúteos",
+        "Posterior de coxa"
+      ],
+      "equipamento": "Máquina",
+      "medida": "reps",
+      "unilateral": false,
+      "porque": "Fortalece a perna inteira com as costas apoiadas, então é seguro para quem tem receio de carregar peso em pé.",
+      "comoFazer": [
+        "Sentada, costas e quadril bem apoiados no encosto",
+        "Pés na plataforma, na largura dos ombros",
+        "Empurre a plataforma até quase esticar a perna",
+        "Volte devagar até o joelho formar cerca de 90 graus"
+      ],
+      "atencao": [
+        "Nunca trave o joelho esticando com força",
+        "O quadril não pode descolar do banco na descida",
+        "Joelho na direção do pé, não para dentro"
+      ],
+      "video": null
+    },
+    {
+      "id": "lunge-reverso",
+      "nome": "Lunge Reverso",
+      "nomeAlt": "Passada para trás",
+      "grupoPrincipal": "Pernas",
+      "grupos": [
+        "Glúteos",
+        "Quadríceps",
+        "Equilíbrio"
+      ],
+      "equipamento": "Halteres (ou peso do corpo)",
+      "medida": "reps",
+      "unilateral": true,
+      "porque": "Treina uma perna de cada vez e o equilíbrio junto. É um dos melhores exercícios para reduzir risco de queda.",
+      "comoFazer": [
+        "Em pé, halteres ao lado do corpo (ou sem peso no começo)",
+        "Dê um passo para trás e desça o joelho em direção ao chão",
+        "Desça até onde for confortável",
+        "Empurre o pé da frente para voltar e alterne a perna"
+      ],
+      "atencao": [
+        "Pode segurar numa barra ou parede para se apoiar no começo",
+        "Tronco ereto, não incline para frente",
+        "Joelho de trás desce para baixo, não para frente"
+      ],
+      "video": null
+    },
+    {
+      "id": "remada-sentada",
+      "nome": "Remada Sentada",
+      "nomeAlt": "Seated Row",
+      "grupoPrincipal": "Costas",
+      "grupos": [
+        "Dorsal",
+        "Meio das costas",
+        "Bíceps"
+      ],
+      "equipamento": "Máquina ou polia baixa",
+      "medida": "reps",
+      "unilateral": false,
+      "porque": "Puxa os ombros para trás e abre o peito. É o antídoto direto da postura curvada.",
+      "comoFazer": [
+        "Sentada, joelhos levemente dobrados, coluna reta",
+        "Puxe o peso em direção ao abdômen",
+        "Aperte as escápulas (junte as costas) no fim do movimento",
+        "Volte devagar sem deixar o tronco ir junto"
+      ],
+      "atencao": [
+        "Costas retas o tempo todo, sem curvar para pegar impulso",
+        "Cotovelos passam rentes ao corpo",
+        "Não jogue o tronco para trás"
+      ],
+      "video": null
+    },
+    {
+      "id": "desenvolvimento-sentado",
+      "nome": "Press de Ombros",
+      "nomeAlt": "Desenvolvimento sentado",
+      "grupoPrincipal": "Ombros",
+      "grupos": [
+        "Deltoide",
+        "Tríceps"
+      ],
+      "equipamento": "Halteres + banco com encosto",
+      "medida": "reps",
+      "unilateral": false,
+      "porque": "É o movimento de guardar coisa no armário de cima. Mantém o ombro forte e com amplitude.",
+      "comoFazer": [
+        "Sentada com as costas apoiadas no encosto",
+        "Halteres na altura das orelhas, cotovelos dobrados",
+        "Empurre para cima até quase esticar os braços",
+        "Desça devagar até a altura das orelhas"
+      ],
+      "atencao": [
+        "Não arqueie a lombar ao empurrar",
+        "Se sentir dor no ombro, pare e avise o professor",
+        "Peso moderado — ombro é articulação delicada"
+      ],
+      "video": null
+    },
+    {
+      "id": "rosca-direta",
+      "nome": "Flexão de Bíceps",
+      "nomeAlt": "Bicep Curl",
+      "grupoPrincipal": "Braços",
+      "grupos": [
+        "Bíceps"
+      ],
+      "equipamento": "Halteres",
+      "medida": "reps",
+      "unilateral": false,
+      "porque": "Força para carregar sacola de mercado, bolsa e neto no colo.",
+      "comoFazer": [
+        "Em pé ou sentada, halteres ao lado do corpo",
+        "Cotovelos colados no tronco",
+        "Dobre os braços levantando os halteres até o ombro",
+        "Desça devagar até esticar"
+      ],
+      "atencao": [
+        "Cotovelo fica parado — não vai para frente",
+        "Não balance o corpo para levantar o peso",
+        "Desça controlado, não deixe o braço despencar"
+      ],
+      "video": null
+    },
+    {
+      "id": "prancha",
+      "nome": "Prancha Isométrica",
+      "nomeAlt": "Plank",
+      "grupoPrincipal": "Core",
+      "grupos": [
+        "Abdômen",
+        "Lombar"
+      ],
+      "equipamento": "Colchonete",
+      "medida": "tempo",
+      "unilateral": false,
+      "porque": "Fortalece o cinturão que sustenta a coluna. Menos dor lombar e mais estabilidade em tudo o que faz.",
+      "comoFazer": [
+        "Apoiada nos antebraços e nas pontas dos pés",
+        "Corpo em linha reta, da cabeça ao calcanhar",
+        "Contraia o abdômen e o glúteo",
+        "Respire normalmente durante o tempo todo"
+      ],
+      "atencao": [
+        "Quadril não sobe nem afunda",
+        "Se for difícil, apoie os joelhos no chão — vale igual",
+        "Não prenda a respiração"
+      ],
+      "video": null
+    }
+  ]
+}

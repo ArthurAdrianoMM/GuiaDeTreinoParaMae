@@ -1,0 +1,40 @@
+{
+  "id": "ficha-mae-2026-01",
+  "nome": "Ficha A/B - Corpo inteiro",
+  "vigenteDesde": "2026-09-12",
+  "vigenteAte": null,
+  "observacao": "Full body 2x por semana, com pelo menos 1 dia de descanso entre os treinos.",
+  "_pendente": "series, reps e descanso abaixo sao SUGESTAO conservadora de iniciante. Confirmar com o professor e ajustar aqui.",
+  "aquecimento": {
+    "descricao": "5 a 10 minutos de esteira ou bicicleta em ritmo leve, so para aquecer.",
+    "duracaoMin": 5
+  },
+  "treinos": [
+    {
+      "id": "A",
+      "nome": "Treino A",
+      "diaSugerido": "Segunda-feira",
+      "exercicios": [
+        { "exercicioId": "goblet-squat",       "series": 3, "reps": "10-12", "descansoSeg": 60 },
+        { "exercicioId": "rdl-halteres",       "series": 3, "reps": "10-12", "descansoSeg": 60 },
+        { "exercicioId": "puxada-frontal",     "series": 3, "reps": "10-12", "descansoSeg": 60 },
+        { "exercicioId": "supino-halteres",    "series": 3, "reps": "10-12", "descansoSeg": 60 },
+        { "exercicioId": "elevacao-lateral",   "series": 2, "reps": "12-15", "descansoSeg": 45 },
+        { "exercicioId": "triceps-polia",      "series": 2, "reps": "12-15", "descansoSeg": 45 }
+      ]
+    },
+    {
+      "id": "B",
+      "nome": "Treino B",
+      "diaSugerido": "Sexta-feira ou sábado",
+      "exercicios": [
+        { "exercicioId": "leg-press-45",           "series": 3, "reps": "10-12", "descansoSeg": 60 },
+        { "exercicioId": "lunge-reverso",          "series": 2, "reps": "10", "descansoSeg": 60 },
+        { "exercicioId": "remada-sentada",         "series": 3, "reps": "10-12", "descansoSeg": 60 },
+        { "exercicioId": "desenvolvimento-sentado","series": 3, "reps": "10-12", "descansoSeg": 60 },
+        { "exercicioId": "rosca-direta",           "series": 2, "reps": "12-15", "descansoSeg": 45 },
+        { "exercicioId": "prancha",                "series": 3, "tempoSeg": "30-60", "descansoSeg": 45 }
+      ]
+    }
+  ]
+}
