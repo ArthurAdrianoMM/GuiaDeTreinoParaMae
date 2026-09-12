@@ -103,7 +103,10 @@ pct exec 101 -- bash -c '
   cp /opt/treino/deploy/nginx.conf /etc/nginx/sites-available/treino
   ln -sf /etc/nginx/sites-available/treino /etc/nginx/sites-enabled/treino
   rm -f /etc/nginx/sites-enabled/default
-  nginx -t && systemctl enable --now nginx && systemctl reload nginx
+  # restart, nao reload: o nginx do pacote ja sobe escutando 0.0.0.0:80 e um
+  # reload nao consegue trocar esse bind para a loopback - ele falha e continua
+  # servindo a pagina padrao do Debian, parecendo que deu certo.
+  nginx -t && systemctl enable nginx && systemctl restart nginx
 
   curl -fsS localhost:3000/api/saude; echo
   curl -fsS -o /dev/null -w "nginx: %{http_code}\n" localhost/
