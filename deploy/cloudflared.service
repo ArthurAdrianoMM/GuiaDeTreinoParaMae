@@ -1,0 +1,33 @@
+[Unit]
+Description=Cloudflare Tunnel - Guia de Treino
+Documentation=https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/
+After=network-online.target nginx.service
+Wants=network-online.target
+
+[Service]
+Type=notify
+User=cloudflared
+Group=cloudflared
+ExecStart=/usr/bin/cloudflared --config /etc/cloudflared/config.yml tunnel run
+Restart=always
+RestartSec=5
+# O tunel disca para fora; se a internet demorar a voltar depois de uma queda
+# de energia, ele fica tentando em vez de desistir.
+TimeoutStartSec=0
+
+# Endurecimento: o processo so' le' a propria configuracao, nao escreve nada.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

@@ -41,7 +41,7 @@ server/
   scripts/backup.js              backup consistente + rotação
   test/api.test.js
 
-deploy/                          nginx, systemd, timer de backup, DEPLOY.md
+deploy/                          nginx, systemd, cloudflared, backup, DEPLOY.md
 ```
 
 ## Como funciona
@@ -82,7 +82,7 @@ Token em `Authorization: Bearer <token>` ou `?k=<token>`.
 
 ## Deploy
 
-Ver [deploy/DEPLOY.md](deploy/DEPLOY.md) — LXC Debian, nginx, systemd, certbot.
+Ver [deploy/DEPLOY.md](deploy/DEPLOY.md) — LXC Debian no Proxmox, nginx, systemd e Cloudflare Tunnel.
 
 ## Pendências
 

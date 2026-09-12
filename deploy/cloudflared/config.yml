@@ -1,0 +1,18 @@
+# /etc/cloudflared/config.yml
+#
+# O UUID e o arquivo de credenciais sao gerados por `cloudflared tunnel create`.
+# O instalar.sh preenche os dois - por isso os marcadores abaixo.
+
+tunnel: UUID-DO-TUNEL
+credentials-file: /etc/cloudflared/UUID-DO-TUNEL.json
+
+# Sem atualizacao automatica: quem decide a hora de atualizar e' voce, nao um
+# binario que se troca sozinho as tres da manha.
+no-autoupdate: true
+
+# Origem unica: o nginx na loopback. Qualquer outro hostname leva 404, entao
+# um CNAME perdido apontando para este tunel nao expoe nada.
+ingress:
+  - hostname: treinomae.arthuradriano.com
+    service: http://127.0.0.1:80
+  - service: http_status:404
