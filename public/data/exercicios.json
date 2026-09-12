@@ -1,5 +1,5 @@
 {
-  "_comentario": "Catalogo de exercicios. Reutilizavel entre fichas e entre pessoas. A ficha referencia por id e define series/reps. video = ID do YouTube (o que vem depois de v=), ainda a preencher.",
+  "_comentario": "Catalogo de exercicios. Reutilizavel entre fichas e entre pessoas. A ficha referencia por id e define series/reps. video = ID do YouTube (o que vem depois de v= ou de /shorts/). videoVertical = true para Shorts (9:16), false para video comum (16:9).",
   "exercicios": [
     {
       "id": "goblet-squat",
@@ -17,15 +17,16 @@
       "comoFazer": [
         "Segure um halter na vertical, junto ao peito, com as duas mãos",
         "Pés na largura dos ombros, pontas levemente para fora",
-        "Desça empurrando o quadril para trás, como se fosse sentar numa cadeira",
-        "Desça até onde for confortável e suba empurrando o chão com os pés"
+        "Desça contando até 3, empurrando o quadril para trás, como se fosse sentar numa cadeira",
+        "Desça até onde for confortável e suba em 1 segundo, empurrando o chão com os pés"
       ],
       "atencao": [
         "Joelho não vai para dentro — aponte na direção do pé",
         "Peito aberto, olhar para frente",
         "Se sentir dor no joelho, diminua a profundidade"
       ],
-      "video": null
+      "video": "isSu2co__oY",
+      "videoVertical": false
     },
     {
       "id": "rdl-halteres",
@@ -44,15 +45,16 @@
       "comoFazer": [
         "Em pé, um halter em cada mão à frente das coxas",
         "Joelhos levemente dobrados e fixos assim",
-        "Empurre o quadril para trás, descendo os halteres rentes às pernas",
-        "Desça até sentir o alongamento atrás da coxa e volte apertando o glúteo"
+        "Empurre o quadril para trás, descendo os halteres rentes às pernas contando até 3",
+        "Desça até sentir o alongamento atrás da coxa e volte em 1 segundo, apertando o glúteo"
       ],
       "atencao": [
         "A coluna fica reta o tempo todo — quem desce é o quadril, não as costas",
         "Não é agachamento: o joelho quase não dobra",
         "Halteres sempre encostados na perna"
       ],
-      "video": null
+      "video": "CBOhr6H7BEY",
+      "videoVertical": true
     },
     {
       "id": "puxada-frontal",
@@ -71,14 +73,15 @@
         "Sentada, joelhos presos sob o apoio",
         "Pegada mais aberta que os ombros",
         "Puxe a barra em direção ao peito, descendo os cotovelos",
-        "Suba controlando, sem deixar o peso cair"
+        "Deixe a barra subir contando até 3, sem deixar o peso cair"
       ],
       "atencao": [
         "Puxe com as costas, não com a força do braço",
         "Não puxe atrás da nuca — sempre na frente",
         "Tronco quase reto, sem jogar o corpo para trás"
       ],
-      "video": null
+      "video": "i_En2drerpY",
+      "videoVertical": true
     },
     {
       "id": "supino-halteres",
@@ -98,14 +101,15 @@
         "Deitada no banco plano, pés apoiados no chão",
         "Halteres na altura do peito, cotovelos abertos em ângulo confortável",
         "Empurre para cima até quase esticar o braço",
-        "Desça devagar até sentir o peito alongar"
+        "Desça contando até 3, até sentir o peito alongar"
       ],
       "atencao": [
         "Não trave o cotovelo com força lá em cima",
         "Desça controlado — a descida é onde está o ganho",
         "Cotovelo não precisa abrir 90 graus, um pouco fechado protege o ombro"
       ],
-      "video": null
+      "video": "vOjawKIqb_o",
+      "videoVertical": true
     },
     {
       "id": "elevacao-lateral",
@@ -123,14 +127,15 @@
         "Em pé, halteres leves ao lado do corpo",
         "Cotovelos levemente dobrados",
         "Levante os braços para os lados até a altura dos ombros",
-        "Desça devagar, sem deixar cair"
+        "Desça contando até 3, sem deixar cair"
       ],
       "atencao": [
         "Peso leve — esse exercício não é de força, é de controle",
         "Não passe da altura do ombro",
         "Não balance o corpo para ajudar"
       ],
-      "video": null
+      "video": "7q282CL_DSU",
+      "videoVertical": true
     },
     {
       "id": "triceps-polia",
@@ -148,13 +153,14 @@
         "Em pé de frente para a polia alta, pegada na barra",
         "Cotovelos colados no tronco",
         "Empurre a barra para baixo até esticar o braço",
-        "Volte devagar até o cotovelo dobrar 90 graus"
+        "Volte contando até 3, até o cotovelo dobrar 90 graus"
       ],
       "atencao": [
         "Só o antebraço se move — o cotovelo fica parado no lugar",
         "Não curve o corpo por cima da barra para fazer força"
       ],
-      "video": null
+      "video": "4NWWB0f0vzQ",
+      "videoVertical": true
     },
     {
       "id": "leg-press-45",
@@ -174,14 +180,15 @@
         "Sentada, costas e quadril bem apoiados no encosto",
         "Pés na plataforma, na largura dos ombros",
         "Empurre a plataforma até quase esticar a perna",
-        "Volte devagar até o joelho formar cerca de 90 graus"
+        "Volte contando até 3, até o joelho formar cerca de 90 graus"
       ],
       "atencao": [
         "Nunca trave o joelho esticando com força",
         "O quadril não pode descolar do banco na descida",
         "Joelho na direção do pé, não para dentro"
       ],
-      "video": null
+      "video": "nDh_BlnLCGc",
+      "videoVertical": true
     },
     {
       "id": "lunge-reverso",
@@ -199,7 +206,7 @@
       "porque": "Treina uma perna de cada vez e o equilíbrio junto. É um dos melhores exercícios para reduzir risco de queda.",
       "comoFazer": [
         "Em pé, halteres ao lado do corpo (ou sem peso no começo)",
-        "Dê um passo para trás e desça o joelho em direção ao chão",
+        "Dê um passo para trás e desça o joelho em direção ao chão contando até 3",
         "Desça até onde for confortável",
         "Empurre o pé da frente para voltar e alterne a perna"
       ],
@@ -208,7 +215,8 @@
         "Tronco ereto, não incline para frente",
         "Joelho de trás desce para baixo, não para frente"
       ],
-      "video": null
+      "video": "mJilHWIBWO8",
+      "videoVertical": true
     },
     {
       "id": "remada-sentada",
@@ -228,14 +236,15 @@
         "Sentada, joelhos levemente dobrados, coluna reta",
         "Puxe o peso em direção ao abdômen",
         "Aperte as escápulas (junte as costas) no fim do movimento",
-        "Volte devagar sem deixar o tronco ir junto"
+        "Volte contando até 3, sem deixar o tronco ir junto"
       ],
       "atencao": [
         "Costas retas o tempo todo, sem curvar para pegar impulso",
         "Cotovelos passam rentes ao corpo",
         "Não jogue o tronco para trás"
       ],
-      "video": null
+      "video": "kbDJnMRyLGQ",
+      "videoVertical": true
     },
     {
       "id": "desenvolvimento-sentado",
@@ -254,14 +263,15 @@
         "Sentada com as costas apoiadas no encosto",
         "Halteres na altura das orelhas, cotovelos dobrados",
         "Empurre para cima até quase esticar os braços",
-        "Desça devagar até a altura das orelhas"
+        "Desça contando até 3, até a altura das orelhas"
       ],
       "atencao": [
         "Não arqueie a lombar ao empurrar",
         "Se sentir dor no ombro, pare e avise o professor",
         "Peso moderado — ombro é articulação delicada"
       ],
-      "video": null
+      "video": "FD_s1Ml-bjc",
+      "videoVertical": true
     },
     {
       "id": "rosca-direta",
@@ -279,14 +289,15 @@
         "Em pé ou sentada, halteres ao lado do corpo",
         "Cotovelos colados no tronco",
         "Dobre os braços levantando os halteres até o ombro",
-        "Desça devagar até esticar"
+        "Desça contando até 3, até esticar o braço"
       ],
       "atencao": [
         "Cotovelo fica parado — não vai para frente",
         "Não balance o corpo para levantar o peso",
         "Desça controlado, não deixe o braço despencar"
       ],
-      "video": null
+      "video": "vDWPtEMrzeU",
+      "videoVertical": true
     },
     {
       "id": "prancha",
@@ -312,7 +323,8 @@
         "Se for difícil, apoie os joelhos no chão — vale igual",
         "Não prenda a respiração"
       ],
-      "video": null
+      "video": "sEw8EGZBC1w",
+      "videoVertical": true
     }
   ]
 }

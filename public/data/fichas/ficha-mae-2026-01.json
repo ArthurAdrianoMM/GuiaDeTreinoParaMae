@@ -3,24 +3,46 @@
   "nome": "Ficha A/B - Corpo inteiro",
   "vigenteDesde": "2026-09-12",
   "vigenteAte": null,
-  "observacao": "Full body 2x por semana, com pelo menos 1 dia de descanso entre os treinos.",
-  "_pendente": "series, reps e descanso abaixo sao SUGESTAO conservadora de iniciante. Confirmar com o professor e ajustar aqui.",
+  "observacao": "Os dois dias treinam o corpo inteiro. Segunda e sexta (ou sábado), com pelo menos dois dias de folga entre um treino e outro. O treino todo cabe em 50 a 60 minutos. O Pilates de terça e quinta e as caminhadas continuam iguais: eles ajudam a recuperar, mas não substituem a musculação — e a musculação não substitui eles.",
   "aquecimento": {
-    "descricao": "5 a 10 minutos de esteira ou bicicleta em ritmo leve, so para aquecer.",
-    "duracaoMin": 5
+    "descricao": "3 a 5 minutos soltando ombros, quadril, tronco e pernas. Não precisa de esteira antes do treino: pedalar ou caminhar por 20 minutos só cansa e não prepara o movimento.",
+    "duracaoMin": 5,
+    "series": "No primeiro exercício de perna e no primeiro de puxar ou empurrar, faça antes uma série leve só com o peso do corpo (10 a 12) e outra com mais ou menos um terço do peso (6 repetições). Essas duas não contam como série do treino."
   },
+  "comoTreinar": [
+    {
+      "titulo": "Quanto peso usar",
+      "texto": "O peso certo é aquele em que, ao terminar a série, você ainda conseguiria fazer mais 1 ou 2 repetições com a mesma forma. Se terminou achando que dava para fazer mais cinco, está leve demais. Se não conseguiu completar as repetições sem perder a forma, está pesado."
+    },
+    {
+      "titulo": "O ritmo de cada repetição",
+      "texto": "Suba em 1 segundo e desça contando até 3. A descida controlada é onde está a maior parte do ganho, e é ela que protege a articulação."
+    },
+    {
+      "titulo": "Quando aumentar o peso",
+      "texto": "Enquanto não chegar no número de cima da faixa, a meta é só somar uma repetição em relação ao treino passado. Quando conseguir o número de cima em todas as séries, com o mesmo controle, aumente o peso no menor degrau que existir. As repetições vão cair para o número de baixo da faixa, e você sobe de novo a partir dali."
+    },
+    {
+      "titulo": "Respeite o descanso",
+      "texto": "O descanso de cada exercício está escrito no cartão. Nos exercícios grandes de perna são 2 a 2,5 minutos, e não é exagero: é o tempo que o músculo precisa para a série seguinte ser pesada de verdade. Descansar pouco só obriga a usar um peso leve demais."
+    },
+    {
+      "titulo": "Pode pesar",
+      "texto": "Peso leve demais não muda nada. Levantar pesado, com a forma correta e o descanso completo, é o que fortalece o músculo e o osso."
+    }
+  ],
   "treinos": [
     {
       "id": "A",
       "nome": "Treino A",
       "diaSugerido": "Segunda-feira",
       "exercicios": [
-        { "exercicioId": "goblet-squat",       "series": 3, "reps": "10-12", "descansoSeg": 60 },
-        { "exercicioId": "rdl-halteres",       "series": 3, "reps": "10-12", "descansoSeg": 60 },
-        { "exercicioId": "puxada-frontal",     "series": 3, "reps": "10-12", "descansoSeg": 60 },
-        { "exercicioId": "supino-halteres",    "series": 3, "reps": "10-12", "descansoSeg": 60 },
-        { "exercicioId": "elevacao-lateral",   "series": 2, "reps": "12-15", "descansoSeg": 45 },
-        { "exercicioId": "triceps-polia",      "series": 2, "reps": "12-15", "descansoSeg": 45 }
+        { "exercicioId": "goblet-squat",       "series": 3, "reps": "8-12",  "descansoSeg": [120, 150] },
+        { "exercicioId": "rdl-halteres",       "series": 3, "reps": "8-12",  "descansoSeg": [120, 150] },
+        { "exercicioId": "puxada-frontal",     "series": 3, "reps": "10-15", "descansoSeg": [90, 120] },
+        { "exercicioId": "supino-halteres",    "series": 3, "reps": "8-12",  "descansoSeg": [90, 120] },
+        { "exercicioId": "elevacao-lateral",   "series": 2, "reps": "12-15", "descansoSeg": [60, 90] },
+        { "exercicioId": "triceps-polia",      "series": 2, "reps": "12-15", "descansoSeg": [60, 90] }
       ]
     },
     {
@@ -28,12 +50,12 @@
       "nome": "Treino B",
       "diaSugerido": "Sexta-feira ou sábado",
       "exercicios": [
-        { "exercicioId": "leg-press-45",           "series": 3, "reps": "10-12", "descansoSeg": 60 },
-        { "exercicioId": "lunge-reverso",          "series": 2, "reps": "10", "descansoSeg": 60 },
-        { "exercicioId": "remada-sentada",         "series": 3, "reps": "10-12", "descansoSeg": 60 },
-        { "exercicioId": "desenvolvimento-sentado","series": 3, "reps": "10-12", "descansoSeg": 60 },
-        { "exercicioId": "rosca-direta",           "series": 2, "reps": "12-15", "descansoSeg": 45 },
-        { "exercicioId": "prancha",                "series": 3, "tempoSeg": "30-60", "descansoSeg": 45 }
+        { "exercicioId": "leg-press-45",           "series": 3, "reps": "10-15", "descansoSeg": [120, 150] },
+        { "exercicioId": "lunge-reverso",          "series": 3, "reps": "8-12",  "descansoSeg": [120, 150] },
+        { "exercicioId": "remada-sentada",         "series": 3, "reps": "10-15", "descansoSeg": [90, 120] },
+        { "exercicioId": "desenvolvimento-sentado","series": 3, "reps": "8-12",  "descansoSeg": [90, 120] },
+        { "exercicioId": "rosca-direta",           "series": 2, "reps": "12-15", "descansoSeg": [60, 90] },
+        { "exercicioId": "prancha",                "series": 2, "tempoSeg": "30-60", "descansoSeg": 60 }
       ]
     }
   ]
