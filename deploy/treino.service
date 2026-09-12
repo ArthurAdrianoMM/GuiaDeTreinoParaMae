@@ -1,0 +1,38 @@
+[Unit]
+Description=Guia de Treino - API
+After=network.target
+
+[Service]
+Type=simple
+User=treino
+Group=treino
+WorkingDirectory=/opt/treino/server
+
+Environment=NODE_ENV=production
+Environment=HOST=127.0.0.1
+Environment=PORTA=3000
+Environment=BANCO=/var/lib/treino/treino.db
+# O nginx serve os arquivos estaticos; o Node cuida so' da API.
+Environment=SERVIR_ESTATICO=false
+
+ExecStart=/usr/bin/node src/server.js
+Restart=always
+RestartSec=3
+
+# Endurecimento: o servico so' pode escrever onde o banco vive.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/treino /var/backups/treino
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

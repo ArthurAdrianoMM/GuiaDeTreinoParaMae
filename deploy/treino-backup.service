@@ -1,0 +1,13 @@
+[Unit]
+Description=Backup do banco do Guia de Treino
+
+[Service]
+Type=oneshot
+User=treino
+Group=treino
+WorkingDirectory=/opt/treino/server
+Environment=BANCO=/var/lib/treino/treino.db
+ExecStart=/usr/bin/node scripts/backup.js /var/backups/treino 30
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/treino /var/backups/treino
