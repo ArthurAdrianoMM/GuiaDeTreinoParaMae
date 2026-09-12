@@ -24,6 +24,9 @@ const TRACOS = {
   video: '<circle cx="12" cy="12" r="8.2"/><path d="M10.4 9.1 15 12l-4.6 2.9Z"/>',
   aquecimento: '<path d="M3.5 12.5h3.8l2-4.6 3 9.2 2.2-6 1.6 3.4h4.4"/>',
   passos: '<path d="M9 6.8h11"/><path d="M9 12h11"/><path d="M9 17.2h11"/><path d="M4.6 6.8h.01"/><path d="M4.6 12h.01"/><path d="M4.6 17.2h.01"/>',
+
+  // Progressao: o alvo de hoje esta' um degrau acima do da ultima vez.
+  subir: '<path d="M12 19.2V6"/><path d="m6.6 11.4 5.4-5.4 5.4 5.4"/>',
 };
 
 /**

@@ -154,13 +154,18 @@ export function listarSessoes() {
     .sort((a, b) => b.data.localeCompare(a.data));
 }
 
-/** Ultima carga registrada para um exercicio, em qualquer sessao anterior. */
-export function ultimaCarga(exercicioId, dataAtual) {
+/**
+ * A ultima vez que ela fez este exercicio: a sessao anterior mais recente que
+ * tenha algum valor gravado. Devolve as series como ficaram, e nao so' a carga,
+ * porque a dica de progressao precisa saber quantas repeticoes sairam.
+ */
+export function ultimaVez(exercicioId, dataAtual) {
+  const temValor = (v) => v !== '' && v != null;
   for (const sessao of listarSessoes()) {
     if (sessao.data >= dataAtual) continue;
-    const series = sessao.exercicios?.[exercicioId]?.series ?? [];
-    const comCarga = series.filter((s) => s && s.carga !== '' && s.carga != null);
-    if (comCarga.length) return { carga: comCarga.at(-1).carga, data: sessao.data };
+    const series = (sessao.exercicios?.[exercicioId]?.series ?? [])
+      .filter((s) => s && (temValor(s.carga) || temValor(s.reps)));
+    if (series.length) return { data: sessao.data, series };
   }
   return null;
 }

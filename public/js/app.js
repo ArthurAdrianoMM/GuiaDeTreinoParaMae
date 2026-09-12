@@ -2,7 +2,7 @@ import {
   hoje,
   getSessao,
   salvarSerie,
-  ultimaCarga,
+  ultimaVez,
   iniciarArmazenamento,
   enviarFila,
 } from './storage.js';
@@ -30,6 +30,7 @@ const el = {
   sessaoConta: document.getElementById('sessao-conta'),
   trilho: document.getElementById('trilho'),
   aquecimento: document.getElementById('aquecimento'),
+  comoTreinar: document.getElementById('como-treinar'),
   nota: document.getElementById('nota-ficha'),
   lista: document.getElementById('lista-exercicios'),
   sync: document.getElementById('sync'),
@@ -62,6 +63,26 @@ function formatarNumero(valor) {
 function baseDoAlvo(texto, reserva) {
   const achado = String(texto ?? '').match(/\d+(?:[.,]\d+)?/);
   return achado ? Number(achado[0].replace(',', '.')) : reserva;
+}
+
+/** Ultimo numero do mesmo alvo: o teto da faixa, que e' onde o peso sobe. */
+function topoDoAlvo(texto) {
+  const achados = String(texto ?? '').match(/\d+(?:[.,]\d+)?/g);
+  return achados ? Number(achados.at(-1).replace(',', '.')) : null;
+}
+
+/**
+ * Descanso legivel. Abaixo de um minuto fica em segundos; dai' para cima vira
+ * minuto, porque "150 s" ela tem que converter de cabeca no meio do treino.
+ */
+function textoDescanso(valor) {
+  if (!valor) return '';
+  const [minimo, maximo] = Array.isArray(valor) ? valor : [valor, valor];
+  const emMinutos = minimo >= 60;
+  const numero = (s) => formatarNumero(emMinutos ? s / 60 : s);
+  const unidade = emMinutos ? 'min' : 's';
+  const faixa = minimo === maximo ? numero(minimo) : `${numero(minimo)} a ${numero(maximo)}`;
+  return `${faixa} ${unidade} de descanso`;
 }
 
 function indiceMaisProximo(valores, alvo) {
@@ -149,29 +170,50 @@ async function iniciar() {
   const { exercicios } = await respCatalogo.json();
   catalogo = Object.fromEntries(exercicios.map((e) => [e.id, e]));
 
-  el.aquecimento.hidden = false;
-  el.aquecimento.innerHTML = `${icone('aquecimento')}
-    <p><strong>Antes de começar:</strong> ${esc(ficha.aquecimento.descricao)}</p>`;
-
+  montarAquecimento();
+  montarComoTreinar();
   montarNota();
   montarAbas();
   selecionarTreino(ficha.treinos[0].id);
 }
 
 /**
- * A ficha carrega uma observacao e, enquanto o professor nao confirmar, um aviso
- * de que series/reps/descanso sao sugestao. Numero prescrito sem essa ressalva
- * vira ordem: ela precisa saber o que ainda esta' em aberto.
+ * Aquecimento: a soltura das articulacoes vale para a sessao inteira, e as
+ * series de aproximacao so' para os primeiros exercicios. Sao dois paragrafos
+ * porque sao duas coisas que ela faz em momentos diferentes.
  */
+function montarAquecimento() {
+  const { descricao, series } = ficha.aquecimento ?? {};
+  if (!descricao) return;
+  el.aquecimento.hidden = false;
+  el.aquecimento.innerHTML = `${icone('aquecimento')}
+    <div>
+      <p><strong>Antes de começar:</strong> ${esc(descricao)}</p>
+      ${series ? `<p>${esc(series)}</p>` : ''}
+    </div>`;
+}
+
+/**
+ * As regras que valem para todos os exercicios — peso, ritmo, quando subir.
+ * Ficam fechadas: sao para consultar nas primeiras semanas, nao algo que ela
+ * precise atravessar toda vez que abre o app no meio da serie.
+ */
+function montarComoTreinar() {
+  const regras = ficha.comoTreinar;
+  if (!Array.isArray(regras) || !regras.length) return;
+  el.comoTreinar.hidden = false;
+  el.comoTreinar.innerHTML = `
+    <summary>${icone('passos')}<span>Como treinar</span>${icone('chevron', 'regras__seta')}</summary>
+    <div class="regras__corpo">
+      ${regras.map((r) => `<h4>${esc(r.titulo)}</h4><p>${esc(r.texto)}</p>`).join('')}
+    </div>`;
+}
+
+/** A observacao da ficha: quando treinar e como isso conversa com o resto da semana. */
 function montarNota() {
-  const linhas = [];
-  if (ficha.observacao) linhas.push(esc(ficha.observacao));
-  if (ficha._pendente) {
-    linhas.push('<b>Ainda por confirmar com o professor:</b> as séries, as repetições e o tempo de descanso abaixo são uma sugestão inicial.');
-  }
-  if (!linhas.length) return;
+  if (!ficha.observacao) return;
   el.nota.hidden = false;
-  el.nota.innerHTML = icone('nota') + `<div>${linhas.map((t) => `<p>${t}</p>`).join('')}</div>`;
+  el.nota.innerHTML = icone('nota') + `<div><p>${esc(ficha.observacao)}</p></div>`;
 }
 
 function montarAbas() {
@@ -216,6 +258,61 @@ function renderizar() {
   atualizarResumo();
 }
 
+// ------------------------------------------------------ o que ela fez antes
+
+/** Os valores gravados de um campo na ultima vez, na ordem das series. */
+function valoresDe(anterior, campo) {
+  if (!anterior) return [];
+  return anterior.series
+    .map((s) => s?.[campo])
+    .filter((v) => v !== '' && v != null)
+    .map(Number);
+}
+
+function ultimoValorDe(anterior, campo) {
+  const valores = valoresDe(anterior, campo);
+  return valores.length ? valores.at(-1) : null;
+}
+
+/**
+ * O treino passado, serie por serie. So' o peso nao basta: a regra de quando
+ * aumentar a carga depende das repeticoes, entao elas precisam estar a' vista.
+ */
+function textoUltimaVez(anterior, exercicio) {
+  if (!anterior) return '';
+  const porTempo = exercicio.medida === 'tempo';
+  const feitas = valoresDe(anterior, 'reps').map(formatarNumero);
+  const carga = ultimoValorDe(anterior, 'carga');
+
+  const partes = [];
+  if (feitas.length) partes.push(feitas.join(' · ') + (porTempo ? ' s' : ''));
+  if (!porTempo && carga != null) partes.push(`<b>${formatarNumero(carga)} kg</b>`);
+  if (!partes.length) return '';
+
+  return `Última vez (${esc(formatarData(anterior.data).slice(0, 5))}): ${partes.join(' com ')}`;
+}
+
+/**
+ * Dupla progressao numa frase so'. Enquanto o topo da faixa nao sai em todas as
+ * series, a meta e' somar uma repeticao no mesmo peso; quando sair, o peso sobe
+ * e ela recomeca no pe' da faixa. Sem isso o "ultima vez: 8 kg" nao diz o que
+ * fazer hoje, e a ficha fica parada no mesmo peso por meses.
+ */
+function dicaDeHoje(item, exercicio, anterior) {
+  if (!anterior || exercicio.medida !== 'reps') return '';
+  const topo = topoDoAlvo(item.reps);
+  if (topo == null) return '';
+
+  const feitas = anterior.series.filter((s) => s?.feito && s.reps !== '' && s.reps != null);
+  if (!feitas.length) return '';
+
+  const bateuOTopo = feitas.length >= item.series && feitas.every((s) => Number(s.reps) >= topo);
+  if (!bateuOTopo) return 'Hoje: mesmo peso, tentando somar uma repetição.';
+
+  const base = baseDoAlvo(item.reps, topo);
+  return `Hoje: suba para o próximo peso e recomece em ${formatarNumero(base)} repetições.`;
+}
+
 /** "3 séries × 10-12", "3 séries × 30-60 s", "2 séries × 10 por perna" */
 function textoAlvo(item, exercicio) {
   if (exercicio.medida === 'tempo') return `${item.series} séries × ${item.tempoSeg} s`;
@@ -229,7 +326,10 @@ function criarCard(item, exercicio) {
   const sessao = getSessao(dataHoje, treinoAtual);
   const registradas = sessao?.exercicios?.[exercicio.id]?.series || [];
   const porTempo = exercicio.medida === 'tempo';
-  const anterior = ultimaCarga(exercicio.id, dataHoje);
+  const anterior = ultimaVez(exercicio.id, dataHoje);
+  const cargaAnterior = ultimoValorDe(anterior, 'carga');
+  const ultimaVezTexto = textoUltimaVez(anterior, exercicio);
+  const dica = dicaDeHoje(item, exercicio, anterior);
 
   // Espelho local do que esta' gravado. As linhas leem daqui para descobrir o
   // valor provavel da proxima serie.
@@ -249,9 +349,10 @@ function criarCard(item, exercicio) {
     <p class="ex__meta">${esc(exercicio.grupoPrincipal)} · ${esc(exercicio.equipamento)}</p>
     <p class="ex__prescricao">
       <span class="ex__alvo">${esc(textoAlvo(item, exercicio))}</span>
-      ${item.descansoSeg ? `<span class="ex__descanso">${esc(item.descansoSeg)} s de descanso</span>` : ''}
+      ${item.descansoSeg ? `<span class="ex__descanso">${esc(textoDescanso(item.descansoSeg))}</span>` : ''}
     </p>
-    ${anterior ? `<p class="ex__anterior">Última vez: <b>${esc(formatarNumero(Number(anterior.carga)))} kg</b> em ${esc(formatarData(anterior.data))}</p>` : ''}
+    ${ultimaVezTexto ? `<p class="ex__anterior">${ultimaVezTexto}</p>` : ''}
+    ${dica ? `<p class="ex__hoje">${icone('subir')}<span>${esc(dica)}</span></p>` : ''}
   `;
   card.append(cabeca);
 
@@ -266,7 +367,7 @@ function criarCard(item, exercicio) {
     for (let j = i - 1; j >= 0; j--) {
       if (estados[j][campo] !== '' && estados[j][campo] != null) return Number(estados[j][campo]);
     }
-    if (campo === 'carga') return anterior ? Number(anterior.carga) : 0;
+    if (campo === 'carga') return cargaAnterior ?? 0;
     return baseDoAlvo(porTempo ? item.tempoSeg : item.reps, porTempo ? 30 : 10);
   }
 
@@ -504,7 +605,7 @@ function criarGuia(exercicio) {
   `;
 
   const video = document.createElement('div');
-  video.className = 'video';
+  video.className = exercicio.videoVertical ? 'video video--vertical' : 'video';
   if (exercicio.video) {
     // O iframe so' e' criado quando ela abre os detalhes: 12 iframes carregando
     // de uma vez travaria o celular e gastaria dados a toa.
@@ -522,7 +623,8 @@ function criarGuia(exercicio) {
   } else {
     video.innerHTML = `<p class="video__ausente">${icone('video')}<span>Vídeo ainda não cadastrado para este exercício.</span></p>`;
   }
-  corpo.append(video);
+  // O video vem antes do texto: ver o movimento primeiro e depois ler os passos.
+  corpo.prepend(video);
 
   bloco.append(corpo);
   return bloco;

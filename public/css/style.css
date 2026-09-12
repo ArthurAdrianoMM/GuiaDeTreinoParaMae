@@ -277,9 +277,56 @@ code {
   color: var(--tinta-2);
   font-size: .875rem;
 }
-.aquecimento .ic { margin-top: .1875rem; color: var(--pinho); }
+.aquecimento .ic { margin-top: .1875rem; flex: none; color: var(--pinho); }
 .aquecimento p { margin: 0; }
+.aquecimento p + p { margin-top: .5rem; }
 .aquecimento strong { color: var(--tinta); }
+
+/* ------------------------------------------------------------- como treinar */
+/* As regras que valem para todo exercicio: peso, ritmo, quando subir a carga.
+   Fechadas por padrao — leitura das primeiras semanas, nao do meio da serie. */
+
+.regras {
+  margin-top: .5rem;
+  border: 1px solid var(--linha);
+  border-radius: var(--r-sm);
+  background: var(--carta);
+}
+
+.regras > summary {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  min-height: 44px;
+  padding: 0 .875rem;
+  border-radius: inherit;
+  color: var(--tinta-2);
+  font-size: .875rem;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+.regras > summary::-webkit-details-marker { display: none; }
+.regras[open] > summary { border-radius: var(--r-sm) var(--r-sm) 0 0; }
+.regras > summary:hover { color: var(--tinta); background: var(--pinho-nevoa); }
+.regras > summary .ic:first-child { flex: none; color: var(--pinho); }
+.regras__seta { margin-left: auto; color: var(--tinta-3); transition: transform .26s var(--saida); }
+.regras[open] .regras__seta { transform: rotate(180deg); }
+
+.regras__corpo {
+  padding: .25rem .875rem .875rem;
+  color: var(--tinta-2);
+  font-size: .875rem;
+}
+.regras__corpo h4 {
+  margin: .875rem 0 .25rem;
+  color: var(--tinta);
+  font-size: .8125rem;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+.regras__corpo h4:first-child { margin-top: .375rem; }
+.regras__corpo p { margin: 0; }
 
 /* Ficha provisoria e observacao: quieto, mas presente. Nao usa ambar — ambar
    aqui quer dizer "nao subiu para o servidor" e nada mais. */
@@ -353,6 +400,19 @@ code {
   font-variant-numeric: tabular-nums;
 }
 .ex__anterior b { color: var(--tinta-2); font-weight: 600; }
+
+/* A meta de hoje sai do que ela fez da ultima vez. Verde porque e' a unica
+   linha do cartao que manda fazer algo diferente do treino passado. */
+.ex__hoje {
+  display: flex;
+  align-items: center;
+  gap: .375rem;
+  margin: .375rem 0 0;
+  color: var(--pinho-fundo);
+  font-size: .8125rem;
+  font-weight: 600;
+}
+.ex__hoje .ic { flex: none; width: 15px; height: 15px; }
 
 /* ---------------------------------------------------------------- series */
 
@@ -611,7 +671,8 @@ code {
 
 .musculos { margin-top: 1rem; color: var(--tinta-3); font-size: .8125rem; }
 
-.video { margin-top: 1rem; }
+/* O video abre o guia, entao a margem fica embaixo e nao em cima. */
+.video { margin: .25rem 0 1.25rem; }
 .video iframe {
   display: block;
   width: 100%;
@@ -619,6 +680,15 @@ code {
   border: 0;
   border-radius: var(--r-sm);
   background: var(--tinta);
+}
+/* Shorts sao 9:16: em 100% de largura o video ficaria mais alto que a tela.
+   Aqui quem manda e' a altura, e a largura sai da proporcao. */
+.video--vertical iframe {
+  width: auto;
+  max-width: 100%;
+  height: min(58svh, 460px);
+  aspect-ratio: 9 / 16;
+  margin-inline: auto;
 }
 .video__ausente {
   display: flex;
