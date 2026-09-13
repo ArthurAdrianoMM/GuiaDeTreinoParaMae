@@ -72,7 +72,7 @@ simply "Treino".
 - 12 real exercises with real instructions, safety notes and purpose text, written for
   this user (`public/data/exercicios.json`).
 - One real ficha, A/B full body. Sets, reps, rest, warm-up and the training rules
-  (`comoTreinar`) are derived from `docs/Treino Feminino Baseado Em Evidências.md`,
+  (`comoTreinar`) are derived from `docs/pesquisa-treino.md`,
   a research report on resistance training for post-menopausal women — not guesses.
 - **Absent and not to be invented:** the YouTube video ids are all `null`. Nothing may
   claim a video exists. No history data, no photos of the user, no testimonials.
