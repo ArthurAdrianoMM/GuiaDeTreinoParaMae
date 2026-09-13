@@ -1,7 +1,18 @@
-# Deploy — LXC no Proxmox + Cloudflare Tunnel
+# Deploy
 
-Requisito único: **Node.js 22.5 ou superior** (usa o SQLite embutido, `node:sqlite`).
+Runbook do container que serve o app em `treinomae.arthuradriano.com`.
+Requisito único: **Node.js 22.5+** (usa o SQLite embutido, `node:sqlite`).
 Não existe `npm install` — o backend não tem dependências.
+
+**Instalar:** [1. container](#1-criar-o-container) · [2. sistema](#2-preparar-o-sistema) ·
+[3. código](#3-trazer-o-código) · [4. usuária](#4-criar-a-usuária-e-pegar-o-link) ·
+[5. serviços](#5-subir-api-backup-e-nginx) · [5b. fechar o SSH](#5b-fechar-o-ssh-do-container) ·
+[6. túnel](#6-o-túnel) · [7. Cloudflare](#7-ajustes-no-painel-da-cloudflare) · [8. conferir](#8-conferir)
+
+**Operar:** [logs e restart](#operação) · [atualizar](#atualizar-o-código) ·
+[trocar a ficha](#trocar-a-ficha-quando-o-professor-passar-a-nova) ·
+[backup](#backup--três-camadas) · [restaurar](#restaurar-um-backup) ·
+[outra pessoa](#adicionar-outra-pessoa)
 
 ## Como isto fica montado
 
